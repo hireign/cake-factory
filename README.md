@@ -1,2 +1,2 @@
-# CSCI_5409_Project
+# Cake Bakery
 
