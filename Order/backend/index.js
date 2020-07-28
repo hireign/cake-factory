@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 const db = require("./api/db/connection");
 db.sequelize.sync()
     .then(() => {
-        console.log("Synchronizing table");
+        console.log("Tables Synchronized");
     })
 
 app.get('/', function (req, res) {
