@@ -17,7 +17,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "request": "^2.88.2",
+    "sequelize": "^6.3.3",
     "serverless-http": "^2.5.0"
   }
 }

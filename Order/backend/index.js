@@ -10,14 +10,20 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const db = require("./api/db/connection");
+db.sequelize.sync()
+    .then(() => {
+        console.log("Synchronizing table");
+    })
+
 app.get('/', function (req, res) {
     res.send("Application Working");
 });
 
 app.use('/order', OrderRoute);
 
-app.listen(3000, function () {
-    console.log("App is running on port 3000");
+app.listen(5000, function () {
+    console.log("App is running on port 5000");
 });
 
 // module.exports.handler = serverless(app);

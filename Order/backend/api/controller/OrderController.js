@@ -1,8 +1,16 @@
-const con = require('../db/sql');
+const db = require("../db/connection");
+const Cake = db.cake;
+const Op = db.Sequelize.Op;
 
 const placeOrders = () => {
     return new Promise(function(resolve, reject) {
-        resolve({status: true, message: "Working"});
+        Cake.findAll()
+            .then(data => {
+                resolve({status: true, data: data});
+            })
+            .catch(err => {
+                reject({status: false, data: err});
+            });
     });
 }
 
