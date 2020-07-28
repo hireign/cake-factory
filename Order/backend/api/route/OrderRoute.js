@@ -8,7 +8,7 @@ router.get('/getorder', async function (req, res) {
 });
 
 router.post('/postorder', async function (req, res) {
-    const data = await method.postOrder();
+    const data = await method.postOrder(req.body);
     res.send(data);
 });
 

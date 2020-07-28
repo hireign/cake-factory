@@ -8,11 +8,8 @@ module.exports = (sequelize, Sequelize) => {
         user_id: {
             type: Sequelize.STRING
         },
-        datestamp: {
-            type: Sequelize.DATE
-        },
         timestamp: {
-            type: Sequelize.TIME
+            type: Sequelize.DATE
         },
         sugar_type: {
             type: Sequelize.STRING

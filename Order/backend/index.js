@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/cake', CakeRoute);
-app.use('/cake', OrderRoute);
+app.use('/order', OrderRoute);
 
 app.listen(5000, function () {
     console.log("App is running on port 5000");
