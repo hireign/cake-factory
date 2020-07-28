@@ -18,6 +18,11 @@ app.get('/', function (req, res) {
 app.use('/bread', JobRoute);
 app.use('/order', OrderRoute);
 
+const db = require("./api/db/sql");
+db.sequelize.sync().then(() => {
+    console.log("sync");
+  });
+
 app.listen(3000, function () {
     console.log("App is running on port 3000");
 });
