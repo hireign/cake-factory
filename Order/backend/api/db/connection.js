@@ -19,5 +19,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.cake = require("../model/cakeModel")(sequelize, Sequelize);
+db.order = require("../model/orderModel")(sequelize, Sequelize);
 
 module.exports = db;

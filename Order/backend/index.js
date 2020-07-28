@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 const serverless = require('serverless-http');
+const CakeRoute = require('./api/route/CakeRoute');
 const OrderRoute = require('./api/route/OrderRoute');
 
 app.use(cors());
@@ -20,7 +21,8 @@ app.get('/', function (req, res) {
     res.send("Application Working");
 });
 
-app.use('/order', OrderRoute);
+app.use('/cake', CakeRoute);
+app.use('/cake', OrderRoute);
 
 app.listen(5000, function () {
     console.log("App is running on port 5000");

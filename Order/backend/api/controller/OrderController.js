@@ -1,10 +1,10 @@
 const db = require("../db/connection");
-const Cake = db.cake;
+const Order = db.order;
 const Op = db.Sequelize.Op;
 
-const placeOrders = () => {
+const getOrder = () => {
     return new Promise(function(resolve, reject) {
-        Cake.findAll()
+        Order.findAll()
             .then(data => {
                 resolve({status: true, data: data});
             })
@@ -14,4 +14,17 @@ const placeOrders = () => {
     });
 }
 
-module.exports.placeOrders = placeOrders;
+const postOrder = () => {
+    return new Promise(function(resolve, reject) {
+        Order.create()
+            .then(data => {
+                resolve({status: true, data: data});
+            })
+            .catch(err => {
+                reject({status: false, data: err});
+            });
+    });
+}
+
+module.exports.getOrder = getOrder;
+module.exports.postOrder = postOrder;
