@@ -3,10 +3,12 @@ module.exports = (sequelize, Sequelize) => {
     const Bread = sequelize.define("bread", {
       bread_id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        unique: true
       },
       bread_type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       bread_qty: {
         type: Sequelize.INTEGER

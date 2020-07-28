@@ -10,6 +10,16 @@ router.get('/allbreads', async function (req, res) {
 router.post('/addbread', async function (req,res){
     const data = await method.createBread(req);
     res.send(data);
+});
+
+router.put('/updatebread', async function (req,res){
+    const data = await method.updateBread(req);
+    res.send(data);
+})
+
+router.put('/reducebreadquantity', async function (req,res){
+    const data = await method.reduceBreadQuantity(req);
+    res.send(data);
 })
 
 module.exports = router;
