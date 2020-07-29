@@ -5,6 +5,7 @@ const cors = require('cors');
 const serverless = require('serverless-http');
 const CakeRoute = require('./api/route/CakeRoute');
 const OrderRoute = require('./api/route/OrderRoute');
+const ReduceQtyRoute = require('./api/route/ReduceQtyRoute');
 
 app.use(cors());
 
@@ -23,6 +24,7 @@ app.get('/', function (req, res) {
 
 app.use('/cake', CakeRoute);
 app.use('/order', OrderRoute);
+app.use('/reduceqty', ReduceQtyRoute);
 
 app.listen(5000, function () {
     console.log("App is running on port 5000");

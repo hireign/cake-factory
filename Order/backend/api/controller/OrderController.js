@@ -1,6 +1,5 @@
 const db = require("../db/connection");
 const Order = db.order;
-const Op = db.Sequelize.Op;
 
 const getOrder = () => {
     return new Promise(function(resolve, reject) {
