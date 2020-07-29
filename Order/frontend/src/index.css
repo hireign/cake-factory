@@ -3,3 +3,36 @@ ol, ul { list-style: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 a { text-decoration:none; outline:none}
 a:hover { cursor:pointer; text-decoration:none; text-indent:0}
+body{
+    font-family: Arial, serif;
+    /*background: linear-gradient(-45deg, #ffffff, #de2aa3, #5e0c56, #842c79);*/
+    background-size: 400% 400%;
+    height: 100vh;
+    padding: 0 20px;
+}
+
+.header{
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    color: #802828;
+}
+
+.home{
+    display: flex;
+    max-width: 900px;
+    margin: 100px auto 0;
+    justify-content: space-between;
+}
+
+.home__choice{
+    width: 300px;
+    height: 300px;
+    border: 5px solid black;
+}
+
+.home__choice p{
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 40px;
+}
