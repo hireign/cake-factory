@@ -1,6 +1,5 @@
 const con = require('../db/sql');
 const Bread = con.bread;
-const Op = con.Sequelize.Op;
 
 const allBreads = () => {
     return new Promise(function(resolve, reject) {
