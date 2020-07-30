@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-
-
 export default class UpdateBread extends Component {
   constructor(props) {
     super(props);
@@ -45,11 +43,6 @@ export default class UpdateBread extends Component {
                 alert("bread with provided id or name does not exist");
             }
         });
-   
-    //   setTimeout(() => {
-    //     this.setState({ allBreads: "temp" });
-    //   }, 1000);
-    //   console.log(this.state.allBlogs);
     } else {
       alert("Please fill all the fields");
     }
