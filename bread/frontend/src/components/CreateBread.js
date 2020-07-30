@@ -45,11 +45,7 @@ export default class CreateBread extends Component {
                 alert("bread with provided id or name already exists");
             }
         });
-   
-    //   setTimeout(() => {
-    //     this.setState({ allBreads: "temp" });
-    //   }, 1000);
-    //   console.log(this.state.allBlogs);
+
     } else {
       alert("Please fill all the fields");
     }
