@@ -13,7 +13,7 @@ const Home = () => {
             </div>
             <div className="home__choice"
                 onClick={() => history.push('/customize', {data: 2})}>
-                <p>Create your own Cake</p>
+                <p>Customize Cake</p>
             </div>
         </div>
     );
