@@ -10,8 +10,9 @@ const getBread = () => {
             if (err) {
                 return console.log(err);
             }
-            console.log(res.body);
-            resolve({status: true, breadType: res.body.result});
+
+            const type = JSON.parse(res.body);
+            resolve({status: true, breadType: type.result});
         });
 
     });
@@ -26,8 +27,8 @@ const getSugar = () => {
             if (err) {
                 return console.log(err);
             }
-            console.log(res.body);
-            resolve({status: true, breadType: res.body});
+            const type = JSON.parse(res.body);
+            resolve({status: true, breadType: type.result});
         });
     });
 }
@@ -41,8 +42,8 @@ const getCream = () => {
             if (err) {
                 return console.log(err);
             }
-            console.log(res.body);
-            resolve({status: true, breadType: res.body});
+            const type = JSON.parse(res.body);
+            resolve({status: true, breadType: type});
         });
     });
 }
