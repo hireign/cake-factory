@@ -51,6 +51,17 @@ app.get('/', function (req, res) {
 
 });
 
+app.get('/allsugar', function (req, res) {
+    const query = 'SELECT * FROM sugars';
+    con.query(query, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        res.send({status:true,result:result});
+    });
+
+});
+
 app.post('/createsugars', function (req, res) {
     console.log(req.body,"--------")
     const query = "SELECT * FROM sugars where sugar_type = '" + req.params.type + "' and qty = " + req.body.qty
