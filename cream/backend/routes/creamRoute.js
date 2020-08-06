@@ -3,8 +3,8 @@
  *
  */
 const express = require("express");
-const creamController = require("../controllers/creamController");
 const router = express.Router();
+const creamController = require("../controllers/creamController");
 
 //returns all the cream products from the database
 router.get("/getallcream", creamController.getAllCream);
