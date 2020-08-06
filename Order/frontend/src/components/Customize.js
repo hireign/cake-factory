@@ -6,13 +6,21 @@ const Customize = (props) => {
 
     let history = useHistory();
     const [bread, setBread] = useState();
+    const [sugar, setSugar] = useState();
+    const [cream, setCream] = useState();
 
     useEffect(() => {
-        const getBreadType = async () => {
-            const data = await axios.get("https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/allbreads");
-            setBread(data.data.result);
+        const getType = async () => {
+            const bType = await axios.get("http://localhost:5000/ingredient/bread");
+            setBread(bType.data.breadType);
+
+            const sType = await axios.get("http://localhost:5000/ingredient/sugar");
+            setSugar(sType.data.sugarType);
+
+            const cType = await axios.get("http://localhost:5000/ingredient/cream");
+            setCream(cType.data.creamType);
         };
-        getBreadType();
+        getType();
     }, []);
 
     return (
@@ -25,6 +33,18 @@ const Customize = (props) => {
                 <option> -</option>
                 {
                     bread?.map((item, index) => (<option key={index}>{item.bread_type}</option>))
+                }
+            </select>
+            <select>
+                <option> -</option>
+                {
+                    sugar?.map((item, index) => (<option key={index}>{item.sugar_type}</option>))
+                }
+            </select>
+            <select>
+                <option> -</option>
+                {
+                    cream?.map((item, index) => (<option key={index}>{item.cream_type}</option>))
                 }
             </select>
         </div>

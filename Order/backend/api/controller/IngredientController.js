@@ -28,7 +28,7 @@ const getSugar = () => {
                 return console.log(err);
             }
             const type = JSON.parse(res.body);
-            resolve({status: true, breadType: type.result});
+            resolve({status: true, sugarType: type.result});
         });
     });
 }
@@ -43,7 +43,7 @@ const getCream = () => {
                 return console.log(err);
             }
             const type = JSON.parse(res.body);
-            resolve({status: true, breadType: type});
+            resolve({status: true, creamType: type});
         });
     });
 }
