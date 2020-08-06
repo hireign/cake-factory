@@ -17,10 +17,12 @@ const Customize = (props) => {
 
     return (
         <div className="customize">
-            <div className="customize__back" onClick={() => history.push('/')}>Back</div>
+            <div className="customize__back" onClick={() => history.push('/')}>
+                <span>&#8592;</span>
+            </div>
             <div>Customize</div>
             <select>
-                <option> - </option>
+                <option> -</option>
                 {
                     bread?.map((item, index) => (<option key={index}>{item.bread_type}</option>))
                 }

@@ -5,7 +5,7 @@ a { text-decoration:none; outline:none}
 a:hover { cursor:pointer; text-decoration:none; text-indent:0}
 body{
     font-family: Arial, serif;
-    /*background: linear-gradient(-45deg, #ffffff, #de2aa3, #5e0c56, #842c79);*/
+    background: linear-gradient(-45deg, #ffffff, #f6ff00, #ffffff, #ee2d2d);
     background-size: 400% 400%;
     height: 100vh;
     padding: 0 20px;
@@ -15,7 +15,8 @@ body{
     font-size: 50px;
     text-align: center;
     font-family: 'Pacifico', cursive;
-    color: #802828;
+    color: #ffffff;
+    letter-spacing: 20px;
 }
 
 .home{
@@ -28,11 +29,67 @@ body{
 .home__choice{
     width: 300px;
     height: 300px;
-    border: 5px solid black;
-}
-
-.home__choice p{
+    box-shadow: 0 0 15px 5px #000000;
+    background: #0073b1;
+    color: #ffffff;
+    border-radius: 10px;
+    line-height: 300px;
+    cursor: pointer;
     font-family: 'Pacifico', cursive;
     text-align: center;
     font-size: 40px;
+    transition: 0.2s ease-in-out;
+}
+
+.home__choice:hover{
+    color: #f6ff00;
+    background: #ee2d2d;
+}
+
+.home__choice:active{
+    transform: translate(2px, 2px);
+}
+
+.speciality__back, .customize__back{
+    height: 30px;
+    width: 30px;
+    background: #ffffff;
+    text-align: center;
+    position: relative;
+    border-radius: 30px;
+    border: 2px solid #ffffff;
+}
+
+.speciality__back span, .customize__back span{
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    margin-top: -16px;
+    font-size: 25px;
+}
+
+.speciality__back:hover, .customize__back:hover{
+    background: #0073b1;
+    cursor: pointer;
+}
+
+.speciality__back:hover span, .customize__back:hover span{
+    color: #ffffff;
+}
+
+.speciality__container{
+    padding: 20px;
+    margin: 50px auto 0;
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
+    box-shadow: 0 0 5px 2px #000000;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    justify-items: center;
+}
+
+.cake{
+    width: 375px;
+    background: red;
 }
