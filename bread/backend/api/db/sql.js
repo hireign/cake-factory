@@ -1,20 +1,24 @@
-const sql = require('mysql');
+const dbConfig = require("./db.config");
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 
-const con = sql.createConnection({
-    host: process.env.RDS_HOSTNAME || 'assign-6.cvitnfsfb6ab.us-east-1.rds.amazonaws.com',
-    user: 'root',
-    password: 'Cloudassign',
-    port: '3306',
-    database: 'assign6'
-});
-
-con.connect(function(err) {
-    if(err){
-        console.log("Database connection unsuccessful" + err + " ");
-        throw err;
-    }else{
-        console.log("Database connection successful");
+    host: dbConfig.HOST,
+    dialect: dbConfig.dialect,
+    logging: false,
+  
+    pool: {
+      max: dbConfig.pool.max,
+      min: dbConfig.pool.min,
+      acquire: dbConfig.pool.acquire,
+      idle: dbConfig.pool.idle
     }
-});
+  });
+
+const con = {};
+
+con.Sequelize = Sequelize;
+con.sequelize = sequelize;
+
+con.bread = require("../model/bread.model")(sequelize, Sequelize);
 
 module.exports = con;
