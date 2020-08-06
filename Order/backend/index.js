@@ -24,7 +24,8 @@ app.get('/', function (req, res) {
 
 app.use('/cake', CakeRoute);
 app.use('/order', OrderRoute);
-app.use('/reduceqty', ReduceQtyRoute);
+app.use('/reduce', ReduceQtyRoute);
+app.use('/ingredient', ReduceQtyRoute);
 
 app.listen(5000, function () {
     console.log("App is running on port 5000");
