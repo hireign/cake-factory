@@ -23,12 +23,11 @@ async function getCreamByPk(req, res, next) {
   try {
     let cream_id_body = req.body.cream_id;
     let cream = await Cream.findByPk(cream_id_body);
-    if (cream === null) {      
-      res.status(404)
-      res.send("fail")
-    }
-    else{      
-      res.status(200)
+    if (cream === null) {
+      res.status(404);
+      res.send("fail");
+    } else {
+      res.status(200);
       res.send(cream);
     }
   } catch (error) {
@@ -59,16 +58,15 @@ async function addCream(req, res, next) {
       cream = await Cream.create({
         cream_id: cream_id_body,
         cream_type: cream_type_body,
-        qty: qty_body
-      }).then(data => {
+        qty: qty_body,
+      }).then((data) => {
         console.log("Cream added: " + data);
       });
-      res.status(200)
+      res.status(200);
       res.send("success");
-    }
-    else{
-      res.status(404)
-      res.send("fail")
+    } else {
+      res.status(404);
+      res.send("fail");
     }
   } catch (error) {
     next(error);
@@ -94,18 +92,20 @@ async function updateCream(req, res, next) {
       },
     });
     if (cream === null) {
-      res.status(404)
-      res.send("fail")
-    }
-    else{
-      cream = await Cream.update({ qty: qty_body }, {
-        where: {
-          cream_id: cream_id_body
+      res.status(404);
+      res.send("fail");
+    } else {
+      cream = await Cream.update(
+        { qty: qty_body },
+        {
+          where: {
+            cream_id: cream_id_body,
+          },
         }
-      }).then(() => {
+      ).then(() => {
         console.log("Qty updated!");
       });
-      res.status(200)
+      res.status(200);
       res.send("success");
     }
   } catch (error) {
@@ -113,9 +113,53 @@ async function updateCream(req, res, next) {
   }
 }
 
+const reduceCreamQuantity = (req) => {
+  return new Promise(function (resolve, reject) {
+    Cream.findOne({
+      where: { cream_id: req.body.cream_id, cream_type: req.body.cream_type },
+    })
+      .then((data) => {
+        const difference = data.dataValues.qty - req.body.cream_qty_ordered;
+        if (difference < 0) {
+          resolve({
+            status: false,
+            company: "cream",
+            result: "Not enough quantity",
+          });
+        } else {
+          Cream.update(
+            {
+              qty: difference,
+            },
+            {
+              where: {
+                cream_id: req.body.cream_id,
+                cream_type: req.body.cream_type,
+              },
+            }
+          )
+            .then((data) => {
+              resolve({
+                status: true,
+                company: "cream",
+                result: "Quantity updated",
+              });
+            })
+            .catch((err) => {
+              resolve({ status: null, result: err });
+            });
+        }
+      })
+      .catch((err) => {
+        resolve({ status: null, result: err });
+      });
+  });
+};
+
 module.exports = {
   getAllCream,
   addCream,
   getCreamByPk,
-  updateCream
+  updateCream,
+  reduceCreamQuantity,
 };
