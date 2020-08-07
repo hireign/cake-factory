@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import CreamService from "../services/CreamService";
-import ProductCard from "../components/ProductCard";
 import MaterialTable from "material-table";
 import "./All.css";
 
@@ -34,20 +33,10 @@ class Creams extends Component {
   render() {
     return (
       <>
-        <h1 className="display-4" style={{ textAlign: "center" }}>
-          Creams
+        <h1 className="display-4" style={{ textAlign: "center", margin: "20px", marginTop: "30px" }}>
+          Cream Company
         </h1>
-        <div className="row row-cols-1 row-cols-md-4 hidden">
-          {this.state.creams.map((cream) => (
-            <ProductCard
-              cream_id={cream.cream_id}
-              cream_type={cream.cream_type}
-              qty={cream.qty}
-              key={cream.cream_id}
-            ></ProductCard>
-          ))}
-        </div>
-        <div style={{ maxWidth: "100%" }}>
+        <div style={{ maxWidth: "70%",   margin: "auto" }}>
           <MaterialTable
             title="Cream Table"
             columns={[
@@ -55,28 +44,36 @@ class Creams extends Component {
                 title: "Cream ID",
                 field: "cream_id",
                 type: "numeric",
-                editable: "never",
+                editable: "onAdd",
               },
-              { title: "Cream Type", field: "cream_type", editable: "never" },
-              { title: "Quantity", field: "qty", type: "numeric" },
+              {
+                title: "Cream Type",
+                field: "cream_type",
+                type: "string",
+                editable: "onAdd",
+              },
+              { title: "Quantity (ml)", field: "qty", type: "numeric" },
             ]}
             data={this.state.creams.map((cream) => cream)}
             editable={{
-              onRowAdd: (newData) =>
-                new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    // setData([...data, newData]);
-                    resolve();
-                  }, 1000);
-                }),
-            }}
-            cellEditable={{
-              onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+              onRowAdd: (newData) =>{
+                return new Promise((resolve, reject) => {
+                  CreamService.addCream(
+                    newData.cream_id,
+                    newData.cream_type,
+                    newData.qty
+                  ).then(() => {
+                    this.fetchProducts();
+                  });
+                  setTimeout(resolve, 1000);
+                });
+              },
+              onRowUpdate: (newData, oldData) => {
                 return new Promise((resolve, reject) => {
                   CreamService.updateQuantity(
-                    rowData.cream_id,
-                    rowData.cream_type,
-                    newValue
+                    oldData.cream_id,
+                    oldData.cream_type,
+                    newData.qty
                   ).then(() => {
                     this.fetchProducts();
                   });
@@ -84,6 +81,22 @@ class Creams extends Component {
                 });
               },
             }}
+
+            //commenting following function as onRowUpdate seems to be doing a better job
+            // celleditable={{
+            //   onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+            //     return new Promise((resolve, reject) => {
+            //       CreamService.updateQuantity(
+            //         rowData.cream_id,
+            //         rowData.cream_type,
+            //         newValue
+            //       ).then(() => {
+            //         this.fetchProducts();
+            //       });
+            //       setTimeout(resolve, 1000);
+            //     });
+            //   },
+            // }}
           />
         </div>
       </>

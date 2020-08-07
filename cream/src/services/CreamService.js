@@ -14,7 +14,7 @@ function updateQuantity(id, type, qty) {
 //to call route to add row
 function addCream(id, type, qty) {
   console.log("addRow called")
-  return Axios.put(`/addcream/${id}/${type}/${qty}`)
+  return Axios.post(`/addcream/${id}/${type}/${qty}`)
 }
 
-export default { getAllCreams, updateQuantity };
+export default { getAllCreams, updateQuantity, addCream };
