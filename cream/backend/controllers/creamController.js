@@ -78,9 +78,9 @@ async function addCream(req, res, next) {
 //this function updates cream quantity using body parameters
 async function updateCream(req, res, next) {
   try {
-    let cream_id_body = req.body.cream_id;
-    let cream_type_body = req.body.cream_type;
-    let qty_body = req.body.qty;
+    let cream_id_body = req.params.id;
+    let cream_type_body = req.params.type;
+    let qty_body = req.params.qty;
     let cream = await Cream.findOne({
       where: {
         [Op.and]: [

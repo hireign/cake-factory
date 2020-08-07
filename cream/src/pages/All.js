@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import CreamService from "../services/CreamService";
 import ProductCard from "../components/ProductCard";
 import MaterialTable from "material-table";
+import "./All.css"
 
 class Creams extends Component {
   constructor(props) {
@@ -14,12 +15,9 @@ class Creams extends Component {
 
   componentDidMount() {
     this.fetchProducts();
-    // this.forceUpdate();
   }
 
   componentDidUpdate() {
-    // this.fetchProducts();
-    console.log(this.state.creams);
   }
 
   fetchProducts() {
@@ -40,32 +38,35 @@ class Creams extends Component {
         <h1 className="display-4" style={{ textAlign: "center" }}>
           Creams
         </h1>
-        {/* <div className="row row-cols-1 row-cols-md-4">
-              {this.state.creams.map((cream) => (
-                  <ProductCard
-                    cream_id = {cream.cream_id}
-                    cream_type = {cream.cream_type}
-                    qty = {cream.qty}
-                    key = {cream.cream_id}
-                  >
-                  </ProductCard>
-              ))}
-                </div> */}
+        <div className="row row-cols-1 row-cols-md-4 hidden">
+          {this.state.creams.map((cream) => (
+            <ProductCard
+              cream_id={cream.cream_id}
+              cream_type={cream.cream_type}
+              qty={cream.qty}
+              key={cream.cream_id}
+            ></ProductCard>
+          ))}
+        </div>
         <div style={{ maxWidth: "100%" }}>
           <MaterialTable
+            title="Cream Table"
             columns={[
-              { title: "Cream ID", field: "id", type: "numeric" },
-              { title: "Cream Type", field: "type" },
+              { title: "Cream ID", field: "cream_id", type: "numeric", editable: 'never' },
+              { title: "Cream Type", field: "cream_type", editable: 'never' },
               { title: "Quantity", field: "qty", type: "numeric" },
             ]}
-            data={[
-              {
-                id: 1,
-                type: "Baran",
-                qty: 1987,
-              },
-            ]}
-            title="Cream Table"
+            data={this.state.creams.map((cream) => cream)}
+            cellEditable={{
+              onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+                return new Promise((resolve, reject) => {
+                  CreamService.updateQuantity(rowData.cream_id, rowData.cream_type, newValue).then(()=>{
+                    this.fetchProducts()
+                  })
+                  setTimeout(resolve, 1000);
+                });
+              }
+            }}
           />
         </div>
       </>

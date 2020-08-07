@@ -13,6 +13,6 @@ router.get("/getcreambypk", creamController.getCreamByPk);
 //allows to add cream products to the database
 router.post("/addcream", creamController.addCream);
 //to update qty of cream by its pk
-router.put("/updatecream", creamController.updateCream);
+router.put("/updatecream/:id/:type/:qty", creamController.updateCream);
 
 module.exports = router;

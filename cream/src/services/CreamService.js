@@ -5,4 +5,9 @@ function getAllCreams() {
   return Axios.get("/getallcream")
 }
 
-export default { getAllCreams };
+function updateQuantity(id, type, qty) {
+  console.log("update quantity called")
+  return Axios.put(`/updatecream/${id}/${type}/${qty}`)
+}
+
+export default { getAllCreams, updateQuantity };
