@@ -2,11 +2,11 @@ const request = require('request');
 const db = require("../db/connection");
 const Order = db.order;
 
-const reduceQty = (data) => {
+const reduceQty = async(data) => {
     return new Promise(function(resolve, reject) {
 
         const bread = {
-            url: 'http://localhost:3000/bread/reducebreadquantity',
+            url: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/reducebreadquantity',
             json: true,
             body: {
                 bread_id: data.bread_id,
@@ -25,7 +25,7 @@ const reduceQty = (data) => {
         });
 
         const sugar = {
-            url: 'http://localhost:3000/sugar/reducesugarquantity',
+            url: 'http://localhost:3001/changeQuantity',
             json: true,
             body: {
                 sugar_id: data.sugar_id,
@@ -56,14 +56,14 @@ const reduceQty = (data) => {
 
         let creamStatus;
 
-        request.put(cream, (err, res, body) => {
-            if (err) {
-                return console.log(err);
-            }
-            creamStatus = res.body.status;
-        });
-
-        if(breadStatus && sugarStatus && creamStatus){
+        // request.put(cream, (err, res, body) => {
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //     creamStatus = res.body.status;
+        // });
+        console.log(breadStatus + "  " + sugarStatus);
+        if(breadStatus && sugarStatus /*&& creamStatus*/){
             Order.create(data)
                 .then(data => {
                     resolve({status: true, result: "Order placed successfully!!"});
