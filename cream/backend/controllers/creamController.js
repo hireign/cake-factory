@@ -24,7 +24,6 @@ async function getCreamByPk(req, res, next) {
     let cream_id_body = req.body.cream_id;
     let cream = await Cream.findByPk(cream_id_body);
     if (cream === null) {
-      res.status(404);
       res.send("fail");
     } else {
       res.status(200);
@@ -64,7 +63,6 @@ async function addCream(req, res, next) {
       res.status(200);
       res.send("success");
     } else {
-      res.status(404);
       res.send("fail");
     }
   } catch (error) {
@@ -91,7 +89,6 @@ async function updateCream(req, res, next) {
       },
     });
     if (cream === null) {
-      res.status(404);
       res.send("fail");
     } else {
       cream = await Cream.update(

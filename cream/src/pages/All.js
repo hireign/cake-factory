@@ -33,10 +33,13 @@ class Creams extends Component {
   render() {
     return (
       <>
-        <h1 className="display-4" style={{ textAlign: "center", margin: "20px", marginTop: "30px" }}>
+        <h1
+          className="display-4"
+          style={{ textAlign: "center", margin: "20px", marginTop: "30px" }}
+        >
           Cream Company
         </h1>
-        <div style={{ maxWidth: "70%",   margin: "auto" }}>
+        <div style={{ maxWidth: "70%", margin: "auto" }}>
           <MaterialTable
             title="Cream Table"
             columns={[
@@ -55,48 +58,50 @@ class Creams extends Component {
               { title: "Quantity (ml)", field: "qty", type: "numeric" },
             ]}
             data={this.state.creams.map((cream) => cream)}
+            options={{
+              headerStyle: {
+                backgroundColor: "#01579b",
+                color: "#FFF",
+              },
+            }}
             editable={{
-              onRowAdd: (newData) =>{
+              onRowAdd: (newData) => {
                 return new Promise((resolve, reject) => {
-                  CreamService.addCream(
-                    newData.cream_id,
-                    newData.cream_type,
-                    newData.qty
-                  ).then(() => {
-                    this.fetchProducts();
-                  });
+                  if (newData.qty < 0) {
+                    window.alert("Quantity cannot be less than 0");
+                  } else {
+                    CreamService.addCream(
+                      newData.cream_id,
+                      newData.cream_type,
+                      newData.qty
+                    ).then((res) => {
+                      if (res.data === "fail") {
+                        window.alert("Oops! Cream already exists!!");
+                      } else {
+                        this.fetchProducts();
+                      }
+                    });
+                  }
                   setTimeout(resolve, 1000);
                 });
               },
               onRowUpdate: (newData, oldData) => {
                 return new Promise((resolve, reject) => {
-                  CreamService.updateQuantity(
-                    oldData.cream_id,
-                    oldData.cream_type,
-                    newData.qty
-                  ).then(() => {
-                    this.fetchProducts();
-                  });
+                  if (newData.qty < 0) {
+                    window.alert("Quantity cannot be less than 0");
+                  } else {
+                    CreamService.updateQuantity(
+                      oldData.cream_id,
+                      oldData.cream_type,
+                      newData.qty
+                    ).then(() => {
+                      this.fetchProducts();
+                    });
+                  }
                   setTimeout(resolve, 1000);
                 });
               },
             }}
-
-            //commenting following function as onRowUpdate seems to be doing a better job
-            // celleditable={{
-            //   onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
-            //     return new Promise((resolve, reject) => {
-            //       CreamService.updateQuantity(
-            //         rowData.cream_id,
-            //         rowData.cream_type,
-            //         newValue
-            //       ).then(() => {
-            //         this.fetchProducts();
-            //       });
-            //       setTimeout(resolve, 1000);
-            //     });
-            //   },
-            // }}
           />
         </div>
       </>
