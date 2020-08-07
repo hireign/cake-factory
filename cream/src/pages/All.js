@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import CreamService from "../services/CreamService";
 import ProductCard from "../components/ProductCard";
 import MaterialTable from "material-table";
-import "./All.css"
+import "./All.css";
 
 class Creams extends Component {
   constructor(props) {
@@ -17,8 +17,7 @@ class Creams extends Component {
     this.fetchProducts();
   }
 
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
   fetchProducts() {
     CreamService.getAllCreams()
@@ -52,20 +51,38 @@ class Creams extends Component {
           <MaterialTable
             title="Cream Table"
             columns={[
-              { title: "Cream ID", field: "cream_id", type: "numeric", editable: 'never' },
-              { title: "Cream Type", field: "cream_type", editable: 'never' },
+              {
+                title: "Cream ID",
+                field: "cream_id",
+                type: "numeric",
+                editable: "never",
+              },
+              { title: "Cream Type", field: "cream_type", editable: "never" },
               { title: "Quantity", field: "qty", type: "numeric" },
             ]}
             data={this.state.creams.map((cream) => cream)}
+            editable={{
+              onRowAdd: (newData) =>
+                new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    // setData([...data, newData]);
+                    resolve();
+                  }, 1000);
+                }),
+            }}
             cellEditable={{
               onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
                 return new Promise((resolve, reject) => {
-                  CreamService.updateQuantity(rowData.cream_id, rowData.cream_type, newValue).then(()=>{
-                    this.fetchProducts()
-                  })
+                  CreamService.updateQuantity(
+                    rowData.cream_id,
+                    rowData.cream_type,
+                    newValue
+                  ).then(() => {
+                    this.fetchProducts();
+                  });
                   setTimeout(resolve, 1000);
                 });
-              }
+              },
             }}
           />
         </div>

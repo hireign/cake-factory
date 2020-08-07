@@ -11,7 +11,7 @@ router.get("/getallcream", creamController.getAllCream);
 //returns a cream by its cream_id
 router.get("/getcreambypk", creamController.getCreamByPk);
 //allows to add cream products to the database
-router.post("/addcream", creamController.addCream);
+router.post("/addcream/:id/:type/:qty", creamController.addCream);
 //to update qty of cream by its pk
 router.put("/updatecream/:id/:type/:qty", creamController.updateCream);
 //to reduce qty of cream
