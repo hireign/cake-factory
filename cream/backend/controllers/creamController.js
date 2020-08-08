@@ -34,6 +34,24 @@ async function getCreamByPk(req, res, next) {
   }
 }
 
+async function getCreamType(req, res, next) {
+  try {
+    let cream = await Cream.findAll({attributes: ['cream_type']});
+    
+    creamType = [];
+
+    cream.map((tup) => {
+        creamType.push(tup.cream_type)
+    })
+
+    console.log(creamType.length);
+
+    res.send(creamType);
+  } catch (error) {
+    next(error);
+  }
+}
+
 //this function adds cream using body parameters
 async function addCream(req, res, next) {
   try {
@@ -158,4 +176,5 @@ module.exports = {
   getCreamByPk,
   updateCream,
   reduceCreamQuantity,
+  getCreamType
 };

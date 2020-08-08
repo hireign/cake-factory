@@ -12,6 +12,11 @@ router.post('/addbread', async function (req,res){
     res.send(data);
 });
 
+router.get('/breadtypes', async function (req, res) {
+    const data = await method.breadTypes();
+    res.send(data);
+});
+
 router.put('/updatebread', async function (req,res){
     const data = await method.updateBread(req);
     res.send(data);

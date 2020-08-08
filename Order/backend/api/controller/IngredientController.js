@@ -3,7 +3,7 @@ const request = require('request');
 const getBread = () => {
     return new Promise(function(resolve, reject) {
         const bread = {
-            url: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/allbreads'
+            url: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/breadtypes'
         };
 
         request.get(bread, (err, res, body) => {
@@ -12,7 +12,8 @@ const getBread = () => {
             }
 
             const type = JSON.parse(res.body);
-            resolve({status: true, breadType: type.result});
+            console.log(type[0]);
+            resolve({status: true, breadType: type});
         });
 
     });
@@ -21,7 +22,7 @@ const getBread = () => {
 const getSugar = () => {
     return new Promise(function(resolve, reject) {
         const sugar = {
-            url: 'http://localhost:3001/allsugar'
+            url: 'http://localhost:3001/sugartypes'
         };
         request.get(sugar, (err, res, body) => {
             if (err) {
@@ -36,7 +37,7 @@ const getSugar = () => {
 const getCream = () => {
     return new Promise(function(resolve, reject) {
         const cream = {
-            url: 'http://localhost:4000/getallcream'
+            url: 'http://localhost:4000/getcreamtype'
         };
         request.get(cream, (err, res, body) => {
             if (err) {

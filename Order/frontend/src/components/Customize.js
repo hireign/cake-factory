@@ -14,12 +14,15 @@ const Customize = (props) => {
 
     const getType = async () => {
         const bType = await axios.get("http://localhost:5000/ingredient/bread");
+        console.log(bType);
         setBread(bType.data.breadType);
 
-        const sType = await axios.get("http://localhost:5000/ingredient/sugar");
-        setSugar(sType.data.sugarType);
+        // const sType = await axios.get("http://localhost:5000/ingredient/sugar");
+        // console.log(sType);
+        // setSugar(sType.data.sugarType);
 
         const cType = await axios.get("http://localhost:5000/ingredient/cream");
+        console.log(cType);
         setCream(cType.data.creamType);
     };
 
