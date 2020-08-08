@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import CreamService from "../services/CreamService";
-import ProductCard from "../components/ProductCard";
 import MaterialTable from "material-table";
+import "./All.css";
 
 class Creams extends Component {
   constructor(props) {
@@ -14,13 +14,9 @@ class Creams extends Component {
 
   componentDidMount() {
     this.fetchProducts();
-    // this.forceUpdate();
   }
 
-  componentDidUpdate() {
-    // this.fetchProducts();
-    console.log(this.state.creams);
-  }
+  componentDidUpdate() {}
 
   fetchProducts() {
     CreamService.getAllCreams()
@@ -37,35 +33,75 @@ class Creams extends Component {
   render() {
     return (
       <>
-        <h1 className="display-4" style={{ textAlign: "center" }}>
-          Creams
+        <h1
+          className="display-4"
+          style={{ textAlign: "center", margin: "20px", marginTop: "30px" }}
+        >
+          Cream Company
         </h1>
-        {/* <div className="row row-cols-1 row-cols-md-4">
-              {this.state.creams.map((cream) => (
-                  <ProductCard
-                    cream_id = {cream.cream_id}
-                    cream_type = {cream.cream_type}
-                    qty = {cream.qty}
-                    key = {cream.cream_id}
-                  >
-                  </ProductCard>
-              ))}
-                </div> */}
-        <div style={{ maxWidth: "100%" }}>
+        <div style={{ maxWidth: "70%", margin: "auto" }}>
           <MaterialTable
-            columns={[
-              { title: "Cream ID", field: "id", type: "numeric" },
-              { title: "Cream Type", field: "type" },
-              { title: "Quantity", field: "qty", type: "numeric" },
-            ]}
-            data={[
-              {
-                id: 1,
-                type: "Baran",
-                qty: 1987,
-              },
-            ]}
             title="Cream Table"
+            columns={[
+              {
+                title: "Cream ID",
+                field: "cream_id",
+                type: "numeric",
+                editable: "onAdd",
+              },
+              {
+                title: "Cream Type",
+                field: "cream_type",
+                type: "string",
+                editable: "onAdd",
+              },
+              { title: "Quantity (ml)", field: "qty", type: "numeric" },
+            ]}
+            data={this.state.creams.map((cream) => cream)}
+            options={{
+              headerStyle: {
+                backgroundColor: "#01579b",
+                color: "#FFF",
+              },
+            }}
+            editable={{
+              onRowAdd: (newData) => {
+                return new Promise((resolve, reject) => {
+                  if (newData.qty < 0) {
+                    window.alert("Quantity cannot be less than 0");
+                  } else {
+                    CreamService.addCream(
+                      newData.cream_id,
+                      newData.cream_type,
+                      newData.qty
+                    ).then((res) => {
+                      if (res.data === "fail") {
+                        window.alert("Oops! Cream already exists!!");
+                      } else {
+                        this.fetchProducts();
+                      }
+                    });
+                  }
+                  setTimeout(resolve, 1000);
+                });
+              },
+              onRowUpdate: (newData, oldData) => {
+                return new Promise((resolve, reject) => {
+                  if (newData.qty < 0) {
+                    window.alert("Quantity cannot be less than 0");
+                  } else {
+                    CreamService.updateQuantity(
+                      oldData.cream_id,
+                      oldData.cream_type,
+                      newData.qty
+                    ).then(() => {
+                      this.fetchProducts();
+                    });
+                  }
+                  setTimeout(resolve, 1000);
+                });
+              },
+            }}
           />
         </div>
       </>

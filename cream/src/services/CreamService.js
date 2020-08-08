@@ -5,4 +5,16 @@ function getAllCreams() {
   return Axios.get("/getallcream")
 }
 
-export default { getAllCreams };
+//to call route to update quantity
+function updateQuantity(id, type, qty) {
+  console.log("update quantity called")
+  return Axios.put(`/updatecream/${id}/${type}/${qty}`)
+}
+
+//to call route to add row
+function addCream(id, type, qty) {
+  console.log("addRow called")
+  return Axios.post(`/addcream/${id}/${type}/${qty}`)
+}
+
+export default { getAllCreams, updateQuantity, addCream };
