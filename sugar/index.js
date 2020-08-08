@@ -113,6 +113,24 @@ app.post('/updatesugars', function (req, res) {
 
 });
 
+
+app.get('/sugartypes', function (req, res) {
+    const query = "SELECT sugar_type FROM sugars"
+    con.query(query, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        let arr = []
+        Object.keys(result).forEach(function(key) {
+            var row = result[key];
+            arr.push(row.sugar_type)  
+        });
+        res.send(arr)
+    });
+});
+
+
+
 app.put('/changeQuantity',function(req,res){
     
 update(req,res)
