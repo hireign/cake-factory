@@ -19,7 +19,7 @@ const Speciality = (props) => {
 
     return (
         <div className="speciality">
-            <div className="back" onClick={() => history.push('/')}>
+            <div className="back" onClick={() => history.go(-1)}>
                 <span>&#8592;</span>
             </div>
             <div className="speciality__container">

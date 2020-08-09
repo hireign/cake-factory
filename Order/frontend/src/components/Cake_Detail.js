@@ -8,7 +8,7 @@ const Cake_Detail = (props) => {
 
     return (
         <div className="cakeDetail">
-            <div className="back" onClick={() => history.push('/')}>
+            <div className="back" onClick={() => history.go(-1)}>
                 <span>&#8592;</span>
             </div>
             <div className="cakeDetail__container">

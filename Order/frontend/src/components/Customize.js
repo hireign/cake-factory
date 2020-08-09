@@ -14,15 +14,13 @@ const Customize = (props) => {
 
     const getType = async () => {
         const bType = await axios.get("http://localhost:5000/ingredient/bread");
-        console.log(bType);
         setBread(bType.data.breadType);
 
-        // const sType = await axios.get("http://localhost:5000/ingredient/sugar");
-        // console.log(sType);
-        // setSugar(sType.data.sugarType);
+        const sType = await axios.get("http://localhost:5000/ingredient/sugar");
+        console.log(sType);
+        setSugar(sType.data.sugarType);
 
         const cType = await axios.get("http://localhost:5000/ingredient/cream");
-        console.log(cType);
         setCream(cType.data.creamType);
     };
 
@@ -40,7 +38,7 @@ const Customize = (props) => {
 
     const createCake = () => {
 
-        if(breadType === undefined){
+        if(breadType === undefined || creamType === undefined || sugarType === undefined){
             alert("Please select the type");
         }else{
             const cake = {
@@ -62,28 +60,28 @@ const Customize = (props) => {
 
     return (
         <div className="customize">
-            <div className="back" onClick={() => history.push('/')}>
+            <div className="back" onClick={() => history.go(-1)}>
                 <span>&#8592;</span>
             </div>
             <div className="customize__container">
-                <button className="cake__buy" onClick={createCake}>Create your cake</button>
+                <button className="customize__create" onClick={createCake}>Create your cake</button>
                 <div className="customize__filter">
                     <select className="customize__select" onChange={fetchBread} defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled>Bread Type</option>
                         {
-                            bread?.map((item, index) => (<option key={index}>{item.bread_type}</option>))
+                            bread?.map((item, index) => (<option key={index}>{item}</option>))
                         }
                     </select>
                     <select className="customize__select" onChange={fetchSugar} defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled>Sugar Type</option>
                         {
-                            sugar?.map((item, index) => (<option key={index}>{item.sugar_type}</option>))
+                            sugar?.map((item, index) => (<option key={index}>{item}</option>))
                         }
                     </select>
                     <select className="customize__select" onChange={fetchCream} defaultValue={'DEFAULT'}>
                         <option value="DEFAULT" disabled>Cream Type</option>
                         {
-                            cream?.map((item, index) => (<option key={index}>{item.cream_type}</option>))
+                            cream?.map((item, index) => (<option key={index}>{item}</option>))
                         }
                     </select>
                 </div>

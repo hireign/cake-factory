@@ -43,9 +43,6 @@ async function getCreamType(req, res, next) {
     cream.map((tup) => {
         creamType.push(tup.cream_type)
     })
-
-    console.log(creamType.length);
-
     res.send(creamType);
   } catch (error) {
     next(error);

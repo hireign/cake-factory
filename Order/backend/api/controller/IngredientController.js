@@ -12,7 +12,6 @@ const getBread = () => {
             }
 
             const type = JSON.parse(res.body);
-            console.log(type[0]);
             resolve({status: true, breadType: type});
         });
 
@@ -29,7 +28,7 @@ const getSugar = () => {
                 return console.log(err);
             }
             const type = JSON.parse(res.body);
-            resolve({status: true, sugarType: type.result});
+            resolve({status: true, sugarType: type});
         });
     });
 }
