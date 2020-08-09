@@ -50,12 +50,16 @@ async function getCreamType(req, res, next) {
 }
 
 async function getCreamQty(req, res, next) {
+
   try {
     let data = await Cream.findOne({attributes: ['qty']},{where: {
-      cream_type: req.body.type
+      cream_type: req.body.cream_type
     }});
-    console.log(data.qty+"   "+req.body.qty);
-    if(data.qty>req.body.qty){
+
+    console.log(req.body.cream_qty_ordered);
+    console.log(data.qty);
+
+    if(data.qty >= req.body.cream_qty_ordered){
       res.send({status:true});
     }else{
       res.send({status:false});

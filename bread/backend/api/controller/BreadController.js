@@ -34,11 +34,11 @@ const breadTypes = () => {
 
 const breadQty = (req) => {
     return new Promise(function(resolve, reject) {
-        Bread.findOne({attributes: ['bread_qty']},{where: {
-            bread_type: req.body.type
+        Bread.findOne({where: {
+            bread_type: req.body.bread_type
           }})
             .then(data => {
-                if(data.bread_qty>req.body.qty){
+                if(data.dataValues.bread_qty >= req.body.bread_qty_ordered){
                     resolve({status:true});
                 }else{
                     resolve({status:false});

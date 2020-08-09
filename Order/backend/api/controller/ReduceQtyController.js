@@ -1,13 +1,12 @@
-const request = require('request');
 const db = require("../db/connection");
+const axios = require('axios');
 const Order = db.order;
 
-const reduceQty = async(data) => {
-    return new Promise(function(resolve, reject) {
+const reduceQty = (data) => {
+    return new Promise(async function(resolve, reject) {
 
         const bread = {
-            url: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/reducebreadquantity',
-            json: true,
+            url: 'http://localhost:3002/bread/reducebreadquantity',
             body: {
                 bread_id: data.bread_id,
                 bread_type: data.bread_type,
@@ -15,38 +14,8 @@ const reduceQty = async(data) => {
             }
         };
 
-        let breadStatus;
-
-        request.put(bread, (err, res, body) => {
-            if (err) {
-                return console.log(err);
-            }
-            breadStatus = res.body.status;
-        });
-
-        const sugar = {
-            url: 'http://localhost:3001/changeQuantity',
-            json: true,
-            body: {
-                sugar_id: data.sugar_id,
-                sugar_type: data.sugar_type,
-                sugar_qty_ordered: data.sugar_qty_ordered,
-            }
-        };
-
-        let sugarStatus;
-
-        request.put(sugar, (err, res, body) => {
-            if (err) {
-                return console.log(err);
-            }
-            console.log(res.body);
-            sugarStatus = res.body.status;
-        });
-
         const cream = {
-            url: 'http://localhost:3000/cream/reducecreamquantity',
-            json: true,
+            url: 'http://localhost:4000/reducecream',
             body: {
                 cream_id: data.cream_id,
                 cream_type: data.cream_type,
@@ -54,25 +23,34 @@ const reduceQty = async(data) => {
             }
         };
 
-        let creamStatus;
+        const sugar = {
+            url: 'http://localhost:3001/changeQuantity',
+            body: {
+                sugar_id: data.sugar_id,
+                sugar_type: data.sugar_type,
+                sugar_qty_ordered: data.sugar_qty_ordered,
+            }
+        };
 
-        // request.put(cream, (err, res, body) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     creamStatus = res.body.status;
-        // });
-        console.log(breadStatus + "  " + sugarStatus);
-        if(breadStatus && sugarStatus /*&& creamStatus*/){
+        const breadResponse = await axios.put(bread.url, bread.body);
+        const breadStatus = breadResponse.data.status;
+
+        const creamResponse = await axios.put(cream.url, cream.body);
+        const creamStatus = creamResponse.data.status;
+
+        const sugarResponse = await axios.put(sugar.url, sugar.body);
+        const sugarStatus = sugarResponse.data.status;
+
+        if(breadStatus && creamStatus && sugarStatus){
             Order.create(data)
                 .then(data => {
                     resolve({status: true, result: "Order placed successfully!!"});
                 })
                 .catch(err => {
-                    reject({status: false, result: err});
+                    reject({status: null, result: err});
                 });
         }else{
-
+            resolve({status: false, result: "Order unsuccessfully!!"});
         }
     });
 }
