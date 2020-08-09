@@ -20,7 +20,7 @@ const getBread = () => {
 const getSugar = () => {
     return new Promise(function(resolve, reject) {
         const sugar = {
-            url: 'http://localhost:3001/sugartypes'
+            url: 'http://129.173.67.214:3001/sugartypes'
         };
         request.get(sugar, (err, res, body) => {
             if (err) {
@@ -35,7 +35,7 @@ const getSugar = () => {
 const getCream = () => {
     return new Promise(function(resolve, reject) {
         const cream = {
-            url: 'http://localhost:4000/getcreamtype'
+            url: 'http://129.173.67.214:4000/getcreamtype'
         };
         request.get(cream, (err, res, body) => {
             if (err) {

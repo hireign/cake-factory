@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {withRouter, useHistory} from "react-router-dom";
 import axios from "axios";
 
-const Customize = (props) => {
+const Customize = () => {
 
     let history = useHistory();
     const [bread, setBread] = useState();
@@ -13,14 +13,14 @@ const Customize = (props) => {
     const [sugarType, setSType] = useState();
 
     const getType = async () => {
-        const bType = await axios.get("http://localhost:5000/ingredient/bread");
+        const bType = await axios.get("https://zl6aa5spv2.execute-api.us-east-1.amazonaws.com/production/ingredient/bread");
         setBread(bType.data.breadType);
 
-        const sType = await axios.get("http://localhost:5000/ingredient/sugar");
+        const sType = await axios.get("https://zl6aa5spv2.execute-api.us-east-1.amazonaws.com/production/ingredient/sugar");
         console.log(sType);
         setSugar(sType.data.sugarType);
 
-        const cType = await axios.get("http://localhost:5000/ingredient/cream");
+        const cType = await axios.get("https://zl6aa5spv2.execute-api.us-east-1.amazonaws.com/production/ingredient/cream");
         setCream(cType.data.creamType);
     };
 

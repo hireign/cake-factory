@@ -6,9 +6,9 @@ const reduceQty = (data) => {
     return new Promise(async function(resolve, reject) {
 
         const bread = {
-            urlBegin: 'http://localhost:3002/transaction/begin',
-            urlCommit: 'http://localhost:3002/transaction/commit',
-            urlRollBack: 'http://localhost:3002/transaction/rollback',
+            urlBegin: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/transaction/begin',
+            urlCommit: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/transaction/commit',
+            urlRollBack: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/transaction/rollback',
             body: {
                 bread_type: data.bread_type,
                 bread_qty_ordered: data.bread_qty_ordered,
@@ -16,9 +16,9 @@ const reduceQty = (data) => {
         };
 
         const cream = {
-            urlBegin: 'http://localhost:4000/begin',
-            urlCommit: 'http://localhost:4000/commit',
-            urlRollBack: 'http://localhost:4000/rollback',
+            urlBegin: 'http://129.173.67.214:4000/begin',
+            urlCommit: 'http://129.173.67.214:4000/commit',
+            urlRollBack: 'http://129.173.67.214:4000/rollback',
             body: {
                 cream_type: data.cream_type,
                 cream_qty_ordered: data.cream_qty_ordered,
@@ -26,9 +26,9 @@ const reduceQty = (data) => {
         };
 
         const sugar = {
-            urlBegin: 'http://localhost:3001/begin',
-            urlCommit: 'http://localhost:3001/commit',
-            urlRollBack: 'http://localhost:3001/rollback',
+            urlBegin: 'http://129.173.67.214:3001/begin',
+            urlCommit: 'http://129.173.67.214:3001/commit',
+            urlRollBack: 'http://129.173.67.214:3001/rollback',
             body: {
                 sugar_type: data.sugar_type,
                 sugar_qty_ordered: data.sugar_qty_ordered,

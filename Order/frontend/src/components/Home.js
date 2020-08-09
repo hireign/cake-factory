@@ -8,11 +8,11 @@ const Home = () => {
     return (
         <div className="home">
             <div className="home__choice"
-                onClick={() => history.push('/speciality', {data: 1})}>
+                onClick={() => history.push('/speciality')}>
                 <p>Our Speciality</p>
             </div>
             <div className="home__choice"
-                onClick={() => history.push('/customize', {data: 2})}>
+                onClick={() => history.push('/customize')}>
                 <p>Customize Cake</p>
             </div>
         </div>

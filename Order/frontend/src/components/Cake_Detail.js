@@ -1,10 +1,26 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
+import axios from "axios";
 
 const Cake_Detail = (props) => {
 
     let history = useHistory();
     let cake = props.location.state.cake;
+
+    const purchase = async () => {
+
+        const data = {
+            bread_type: cake.bread_type,
+            cream_type: cake.cream_type,
+            sugar_type: cake.sugar_type,
+            bread_qty_ordered: 5,
+            cream_qty_ordered: 1,
+            sugar_qty_ordered: 1
+        }
+
+        const status = await axios.get("https://zl6aa5spv2.execute-api.us-east-1.amazonaws.com/production/payment", { data: data});
+        console.log(status);
+    }
 
     return (
         <div className="cakeDetail">
@@ -20,7 +36,7 @@ const Cake_Detail = (props) => {
                     <p>Bread Type : {cake.bread_type}</p>
                     <p>Sugar Type : {cake.sugar_type}</p>
                     <p>Cream Type : {cake.cream_type}</p>
-                    <button className="cake__buy">Place Order</button>
+                    <button className="cake__buy" onClick={purchase}>Place Order</button>
                 </div>
             </div>
         </div>

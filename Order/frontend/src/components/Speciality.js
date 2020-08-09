@@ -11,7 +11,7 @@ const Speciality = (props) => {
 
     useEffect(() => {
         const getCake = async () => {
-            const data = await axios.get("http://localhost:5000/cake/getallcake");
+            const data = await axios.get("https://zl6aa5spv2.execute-api.us-east-1.amazonaws.com/production/cake/getallcake");
             setCake(data.data.data);
         };
         getCake();

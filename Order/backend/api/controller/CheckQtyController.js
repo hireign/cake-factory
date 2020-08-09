@@ -4,7 +4,7 @@ const checkQty = (data) => {
     return new Promise(async function(resolve, reject) {
 
         const bread = {
-            url: 'http://localhost:3002/bread/breadqty',
+            url: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/breadqty',
             body: {
                 bread_type: data.bread_type,
                 bread_qty_ordered: 5,
@@ -12,7 +12,7 @@ const checkQty = (data) => {
         };
 
         const cream = {
-            url: 'http://localhost:4000/getcreamqty',
+            url: 'http://129.173.67.214:4000/getcreamqty',
             body: {
                 cream_type: data.cream_type,
                 cream_qty_ordered: 1,
@@ -20,7 +20,7 @@ const checkQty = (data) => {
         };
 
         const sugar = {
-            url: 'http://localhost:3001/sugarqty',
+            url: 'http://129.173.67.214:3001/sugarqty',
             body: {
                 sugar_type: data.sugar_type,
                 sugar_qty_ordered: 1,
