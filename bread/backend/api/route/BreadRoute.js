@@ -7,6 +7,11 @@ router.get('/allbreads', async function (req, res) {
     res.send(data);
 });
 
+router.get('/breadqty', async function (req, res) {
+    const data = await method.breadQty(req);
+    res.send(data);
+});
+
 router.post('/addbread', async function (req,res){
     const data = await method.createBread(req);
     res.send(data);

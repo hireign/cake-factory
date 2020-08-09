@@ -6,6 +6,7 @@ const express = require("express");
 const router = express.Router();
 const creamController = require("../controllers/creamController");
 
+router.get("/getcreamqty", creamController.getCreamQty);
 router.get("/getcreamtype", creamController.getCreamType);
 //returns all the cream products from the database
 router.get("/getallcream", creamController.getAllCream);

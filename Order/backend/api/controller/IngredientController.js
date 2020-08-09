@@ -15,7 +15,6 @@ const getBread = () => {
             console.log(type[0]);
             resolve({status: true, breadType: type});
         });
-
     });
 }
 
