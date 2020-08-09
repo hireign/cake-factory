@@ -32,6 +32,24 @@ const breadTypes = () => {
     });
 }
 
+const breadQty = (req) => {
+    return new Promise(function(resolve, reject) {
+        Bread.findOne({attributes: ['bread_qty']},{where: {
+            bread_type: req.body.type
+          }})
+            .then(data => {
+                if(data.bread_qty>req.body.qty){
+                    resolve({status:true});
+                }else{
+                    resolve({status:false});
+                }
+            })
+            .catch(err => {
+                resolve({status:null,result: err});
+            });  
+    });
+}
+
 const createBread=(req)=>{
     return new Promise(function(resolve, reject) {
         Bread.findOne({where:{bread_id:req.body.bread_id, bread_type: req.body.bread_type}})
@@ -123,3 +141,4 @@ module.exports.createBread = createBread;
 module.exports.updateBread = updateBread;
 module.exports.reduceBreadQuantity = reduceBreadQuantity;
 module.exports.breadTypes = breadTypes;
+module.exports.breadQty = breadQty;

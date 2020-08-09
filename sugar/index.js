@@ -129,6 +129,22 @@ app.get('/sugartypes', function (req, res) {
     });
 });
 
+app.get('/sugarqty', function (req, res) {
+    const query = "SELECT qty FROM sugars where sugar_type='"+req.body.type+"'";
+    con.query(query, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        result = JSON.stringify(result);
+        result = JSON.parse(result);
+        const qty = result[0].qty;
+        if(qty>req.body.qty){
+            res.send({status:true});
+        }else{
+            res.send({status:false});
+        }
+    });
+});
 
 
 app.put('/changeQuantity',function(req,res){

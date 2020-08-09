@@ -49,6 +49,22 @@ async function getCreamType(req, res, next) {
   }
 }
 
+async function getCreamQty(req, res, next) {
+  try {
+    let data = await Cream.findOne({attributes: ['qty']},{where: {
+      cream_type: req.body.type
+    }});
+    console.log(data.qty+"   "+req.body.qty);
+    if(data.qty>req.body.qty){
+      res.send({status:true});
+    }else{
+      res.send({status:false});
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
 //this function adds cream using body parameters
 async function addCream(req, res, next) {
   try {
@@ -173,5 +189,6 @@ module.exports = {
   getCreamByPk,
   updateCream,
   reduceCreamQuantity,
-  getCreamType
+  getCreamType,
+  getCreamQty
 };

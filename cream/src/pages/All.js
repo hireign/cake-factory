@@ -55,7 +55,7 @@ class Creams extends Component {
                 type: "string",
                 editable: "onAdd",
               },
-              { title: "Quantity (ml)", field: "qty", type: "numeric" },
+              { title: "Quantity", field: "qty", type: "numeric" },
             ]}
             data={this.state.creams.map((cream) => cream)}
             options={{

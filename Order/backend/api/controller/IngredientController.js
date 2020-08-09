@@ -14,7 +14,6 @@ const getBread = () => {
             const type = JSON.parse(res.body);
             resolve({status: true, breadType: type});
         });
-
     });
 }
 
