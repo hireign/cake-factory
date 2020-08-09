@@ -129,8 +129,6 @@ app.get('/sugartypes', function (req, res) {
     });
 });
 
-
-
 app.get('/sugarqty', function (req, res) {
     const query = "SELECT qty FROM sugars where sugar_type='"+req.body.type+"'";
     con.query(query, (err, result) => {
