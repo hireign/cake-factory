@@ -4,6 +4,8 @@ const app = express();
 const cors = require('cors');
 const serverless = require('serverless-http');
 const JobRoute = require('./api/route/BreadRoute');
+const TransactionRoute = require('./api/route/transactionRoute');
+
 
 app.use(cors());
 
@@ -15,6 +17,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/bread', JobRoute);
+app.use('/transaction', TransactionRoute);
 
 const db = require("./api/db/sql");
 db.sequelize.sync().then(() => {
