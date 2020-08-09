@@ -109,7 +109,7 @@ const updateBread=(req)=>{
 
 const reduceBreadQuantity=(req)=>{
     return new Promise(function(resolve, reject) {
-        Bread.findOne({where:{bread_id:req.body.bread_id, bread_type: req.body.bread_type}})
+        Bread.findOne({where:{bread_type: req.body.bread_type}})
             .then(data => {
                 const difference = data.dataValues.bread_qty - req.body.bread_qty_ordered;
                 if(difference < 0){
@@ -119,7 +119,6 @@ const reduceBreadQuantity=(req)=>{
                         bread_qty: difference
                       }, {
                         where: { 
-                        bread_id: req.body.bread_id,
                         bread_type: req.body.bread_type,
                          }
                       })

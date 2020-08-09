@@ -81,7 +81,7 @@ app.post('/createsugars', function (req, res) {
 });
 
 app.post('/updatesugars', function (req, res) {
-    const query = "SELECT * FROM sugars where sugar_type = '" + req.body.type + "' and qty = " + req.body.qty
+    const query = "SELECT * FROM sugars where sugar_type = '" + req.body.type + "'";
     console.log(query)
     con.query(query, (err, result) => {
         if (err) {
@@ -179,6 +179,13 @@ function update(req,res){
         }
     })
 }
+
+app.post('/xastart',function(req,res){
+    
+    
+    
+    });
+
 
 app.listen(3001, function () {
     console.log("App is running on port 3001");

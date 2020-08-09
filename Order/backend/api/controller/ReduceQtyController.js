@@ -8,7 +8,6 @@ const reduceQty = (data) => {
         const bread = {
             url: 'http://localhost:3002/bread/reducebreadquantity',
             body: {
-                bread_id: data.bread_id,
                 bread_type: data.bread_type,
                 bread_qty_ordered: data.bread_qty_ordered,
             }
@@ -17,7 +16,6 @@ const reduceQty = (data) => {
         const cream = {
             url: 'http://localhost:4000/reducecream',
             body: {
-                cream_id: data.cream_id,
                 cream_type: data.cream_type,
                 cream_qty_ordered: data.cream_qty_ordered,
             }
@@ -26,7 +24,6 @@ const reduceQty = (data) => {
         const sugar = {
             url: 'http://localhost:3001/changeQuantity',
             body: {
-                sugar_id: data.sugar_id,
                 sugar_type: data.sugar_type,
                 sugar_qty_ordered: data.sugar_qty_ordered,
             }

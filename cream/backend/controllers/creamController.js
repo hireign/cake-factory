@@ -147,7 +147,7 @@ async function updateCream(req, res, next) {
 const reduceCreamQuantity = (req) => {
   return new Promise(function (resolve, reject) {
     Cream.findOne({
-      where: { cream_id: req.body.cream_id, cream_type: req.body.cream_type },
+      where: { cream_type: req.body.cream_type },
     })
       .then((data) => {
         const difference = data.dataValues.qty - req.body.cream_qty_ordered;
@@ -164,7 +164,6 @@ const reduceCreamQuantity = (req) => {
             },
             {
               where: {
-                cream_id: req.body.cream_id,
                 cream_type: req.body.cream_type,
               },
             }
