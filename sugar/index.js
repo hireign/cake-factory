@@ -52,14 +52,11 @@ app.get('/', function (req, res) {
 });
 
 app.post('/createsugars', function (req, res) {
-    console.log(req.body,"--------")
     const query = "SELECT * FROM sugars where sugar_type = '" + req.params.type + "' and qty = " + req.body.qty
-    console.log(query)
     con.query(query, (err, result) => {
         if (err) {
             throw err;
         }
-        console.log(result.length,result)
         if (result.length == 0) {
             const query = "insert into sugars (sugar_type, qty) values ('" + req.body.type + "',"+ req.body.qty + ")"
             con.query(query, (err, result) => {
@@ -82,12 +79,10 @@ app.post('/createsugars', function (req, res) {
 
 app.post('/updatesugars', function (req, res) {
     const query = "SELECT * FROM sugars where sugar_type = '" + req.body.type + "'";
-    console.log(query)
     con.query(query, (err, result) => {
         if (err) {
             throw err;
         }
-        console.log(result.length,result)
         if (result.length > 0) {
             const query = "update sugars set qty = " + req.body.update_qty + " where id = " + result[0].id + " and sugar_type = '"
             + req.body.type + "'"
@@ -146,19 +141,13 @@ app.get('/sugarqty', function (req, res) {
 });
 
 app.get('/begin', function(req,res){
-
-	console.log(req.body);
-
 	let difference;
     var query1 = `SELECT * FROM sugars WHERE sugar_type = "${req.body.sugar_type}" `;
 
     con.query(query1,(err,result)=>{
     	if(err) throw err
         if(result.length > 0){
-        	console.log(result[0].qty);
-        	console.log(req.body.sugar_qty_ordered);
-            difference = result[0].qty - req.body.sugar_qty_ordered;
-            console.log(difference);
+        	difference = result[0].qty - req.body.sugar_qty_ordered;
             var query1 = `START TRANSACTION`;
 			var query2 = `UPDATE sugars SET qty = ${difference} WHERE sugar_type = "${req.body.sugar_type}"`;
 			con.query(query1, (err,response) => {
@@ -167,8 +156,14 @@ app.get('/begin', function(req,res){
 		        	con.query(query2,(err,response)=>{
 			            if(err) throw err
 			            else{
-			                res.send({status:true});
-			            }
+                            if (difference > 0){
+                                res.send({status:true});
+                            }
+                            else
+                            {
+                                res.send({status:true, company: 'bread', result: "Prepared to commit"})
+                            }
+			             }
 			        })
 		        }
     		})
