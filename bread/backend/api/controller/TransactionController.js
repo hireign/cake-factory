@@ -13,6 +13,7 @@ const begin=(req)=>{
                 difference = data.dataValues.bread_qty - req.body.bread_qty_ordered;
             })
             .catch(err => {
+                console.log("1 " + err);
                 resolve({status:null,result: err});
             })
                 await Bread.update({
@@ -23,44 +24,18 @@ const begin=(req)=>{
                      }, transaction
                   })
                     .then(data => {
+                        if(difference < 0){
+                            resolve({status:false, company: 'bread', result: "Not enough quantity"});
+                        }else{
+                            resolve({status:true, company: 'bread', result: "Prepared to commit"});
+                        }
                     })
                     .catch(err => {
+                        console.log("2 " + err);
                         resolve({status:null,result: err});
-                    });
-
-                if(difference < 0){
-                    resolve({status:false, company: 'bread', result: "Not enough quantity"});
-                }else{
-                    resolve({status:true, company: 'bread', result: "Prepared to commit"});
-                }
-            
+                    });    
     })
 }
-
-
-
-
-
-// const begin=()=>{
-//     return new Promise(async function(resolve, reject) {
-//         transaction = await con.sequelize.transaction();
-//         await Bread.update({
-//             bread_qty: 2000
-//           }, {
-//             where: { 
-//             bread_type: "abc",
-//              }, transaction
-//           })
-//             .then(data => {
-//                 resolve({status:true, company: data});
-//             })
-//             .catch(err => {
-//                 resolve({status:null,result: err});
-//             });
-//     })
-// }
-
-
 
 const commit=()=>{
     return new Promise(async function(resolve, reject) {

@@ -145,47 +145,59 @@ app.get('/sugarqty', function (req, res) {
     });
 });
 
+app.get('/begin', function(req,res){
 
-app.put('/changeQuantity',function(req,res){
-    
-update(req,res)
+	console.log(req.body);
 
-});
+	let difference;
+    var query1 = `SELECT * FROM sugars WHERE sugar_type = "${req.body.sugar_type}" `;
 
-
-function update(req,res){
-    var type= req.body.sugar_type
-    var query1 = `Select  * from sugars where sugar_type = "${type}" `;
-    
     con.query(query1,(err,result)=>{
-        if(err) throw err
+    	if(err) throw err
         if(result.length > 0){
-            const difference = result[0].qty - req.body.sugar_qty_ordered;
-
-            if(difference<0){
-                
-                res.json({status:false, company: 'sugar', result: "Not enough quantity"})
-            }else{
-                var query2=`Update sugars set qty = ${difference} where id = ${result[0].id} and sugar_type = "${result[0].sugar_type }"`
-                con.query(query2,(err,response)=>{
-                    if(err) throw err
-                    else{
-                        res.send({status:true, company: 'sugar', result:"Quantity updated"});
-                    }
-                })
-            }
+        	console.log(result[0].qty);
+        	console.log(req.body.sugar_qty_ordered);
+            difference = result[0].qty - req.body.sugar_qty_ordered;
+            console.log(difference);
+            var query1 = `START TRANSACTION`;
+			var query2 = `UPDATE sugars SET qty = ${difference} WHERE sugar_type = "${req.body.sugar_type}"`;
+			con.query(query1, (err,response) => {
+				if(err) throw err
+		        else{
+		        	con.query(query2,(err,response)=>{
+			            if(err) throw err
+			            else{
+			                res.send({status:true});
+			            }
+			        })
+		        }
+    		})
         }else{
-            res.json({status:false, company: 'sugar', result:"Item not available"})
+        	res.json({status:false, company: 'sugar', result:"Item not available"});
         }
     })
-}
+	
+});
 
-app.post('/xastart',function(req,res){
-    
-    
-    
-    });
+app.get('/commit',function(req,res){
+	var query1 = `COMMIT`;
+	con.query(query1,(err,response)=>{
+        if(err) throw err
+        else{
+            res.send({status:true});
+        }
+    })
+});
 
+app.get('/rollback',function(req,res){
+	var query1 = `ROLLBACK`;
+	con.query(query1,(err,response)=>{
+        if(err) throw err
+        else{
+            res.send({status:true});
+        }
+    })
+});
 
 app.listen(3001, function () {
     console.log("App is running on port 3001");

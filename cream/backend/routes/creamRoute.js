@@ -24,17 +24,17 @@ router.put('/reducecream', async function (req,res){
 
 
 router.get('/begin', async function (req, res) {
-    const data = await method.begin(req);
+    const data = await creamController.begin(req);
     res.send(data);
 });
 
 router.get('/commit', async function (req, res) {
-    const data = await method.commit();
+    const data = await creamController.commit();
     res.send(data);
 });
 
 router.get('/rollback', async function (req, res) {
-    const data = await method.rollback();
+    const data = await creamController.rollback();
     res.send(data);
 });
 

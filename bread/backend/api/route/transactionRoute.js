@@ -17,9 +17,4 @@ router.get('/rollback', async function (req, res) {
     res.send(data);
 });
 
-router.get('/rollback', async function (req, res) {
-    const data = await method.rollback();
-    res.send(data);
-});
-
 module.exports = router;
