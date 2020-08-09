@@ -7,6 +7,7 @@ const Cream = con.cream;
 const { Sequelize } = require("sequelize");
 const e = require("express");
 const Op = Sequelize.Op;
+let transaction;
 
 //this function returns all creams from the database
 async function getAllCream(req, res, next) {
@@ -186,6 +187,62 @@ const reduceCreamQuantity = (req) => {
   });
 };
 
+const begin=(req)=>{
+  return new Promise(async function(resolve, reject) {
+      let difference;
+      transaction = await con.sequelize.transaction();
+      await Cream.findOne({where:{cream_type: req.body.cream_type}})
+          .then(data => {
+              difference = data.dataValues.qty - req.body.cream_qty_ordered;
+          })
+          .catch(err => {
+              resolve({status:null,result: err});
+          })
+              await Cream.update({
+                  qty: difference
+                }, {
+                  where: { 
+                  cream_type: req.body.cream_type,
+                   }, transaction
+                })
+                  .then(data => {
+                  })
+                  .catch(err => {
+                      resolve({status:null,result: err});
+                  });
+
+              if(difference < 0){
+                  resolve({status:false, company: 'cream', result: "Not enough quantity"});
+              }else{
+                  resolve({status:true, company: 'cream', result: "Prepared to commit"});
+              }
+          
+  })
+}
+
+const commit=()=>{
+  return new Promise(async function(resolve, reject) {
+      if(transaction){
+          await transaction.commit();
+          resolve({status:true});
+      }else{
+          resolve({status:false});
+      }
+  })
+}
+
+const rollback=()=>{
+  return new Promise(async function(resolve, reject) {
+      if(transaction){
+          await transaction.rollback();
+          resolve({status:true});
+      }else{
+          resolve({status:false});
+      }
+  })
+}
+
+
 module.exports = {
   getAllCream,
   addCream,
@@ -193,5 +250,8 @@ module.exports = {
   updateCream,
   reduceCreamQuantity,
   getCreamType,
-  getCreamQty
+  getCreamQty,
+  commit,
+  rollback,
+  begin
 };
