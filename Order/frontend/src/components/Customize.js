@@ -42,7 +42,7 @@ const Customize = () => {
             alert("Please select the type");
         }else{
             const cake = {
-                cake_image: "",
+                cake_url: "https://project-cloud-order.s3.amazonaws.com/cake7.jpg",
                 cake_name: "Customized Cake",
                 bread_type: breadType,
                 sugar_type: sugarType,

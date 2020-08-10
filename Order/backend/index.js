@@ -29,8 +29,8 @@ app.use('/payment', PaymentRoute);
 app.use('/ingredient', IngredientRoute);
 app.use('/check', CheckRoute);
 
-app.listen(5000, function () {
-    console.log("App is running on port 5000");
-});
+// app.listen(5000, function () {
+//     console.log("App is running on port 5000");
+// });
 
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);

@@ -53,6 +53,19 @@ const reduceQty = (data) => {
         console.log(sugarStatus);
 
         if(breadStatus && creamStatus && sugarStatus){
+
+            const order = {
+                timestamp: new Date(),
+                bread_type: bread.body.bread_type,
+                bread_qty: bread.body.bread_qty_ordered,
+                cream_type: cream.body.cream_type,
+                cream_qty: cream.body.cream_qty_ordered,
+                sugar_type: sugar.body.sugar_type,
+                sugar_qty: sugar.body.sugar_qty_ordered,
+            }
+
+            console.log(order);
+
             await axios.get(bread.urlCommit)
             console.log("1");
             await axios.get(cream.urlCommit);
@@ -62,15 +75,13 @@ const reduceQty = (data) => {
 
             console.log("Done");
 
-            Order.create(data)
+            Order.create(order)
                 .then(data => {
                     resolve({status: true, result: "Order placed successfully!!"});
                 })
                 .catch(err => {
                     reject({status: null, result: err});
                 });
-
-
         }else{
             await axios.get(bread.urlRollBack);
             await axios.get(cream.urlRollBack);

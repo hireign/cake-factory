@@ -10,7 +10,7 @@ const Cake = (props) => {
             cake: props.cake
         })}>
             <div className="cake__image">
-                <img src="" alt={props.cake.cake_name}/>
+                <img src={props.cake.cake_url} alt={props.cake.cake_name}/>
             </div>
             <div className="cake__container">
                 <div className="cake__name">{props.cake.cake_name}</div>

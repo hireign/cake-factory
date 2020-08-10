@@ -104,6 +104,12 @@ body{
     width: 150px;
 }
 
+.cake__image img{
+    width: 150px;
+    height: 125px;
+    object-fit: cover;
+}
+
 .cake__container{
     width: 225px;
 }
@@ -194,6 +200,64 @@ body{
 }
 
 .customize__create:hover{
+    cursor: pointer;
+    background: #ee2d2d;
+    color: #f6ff00;
+}
+
+.cakeDetail__container{
+    display: flex;
+}
+
+.cakeDetail__image{
+    width: 500px;
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-right: 50px;
+}
+
+.cakeDetail__image img{
+    width: 500px;
+    height: 350px;
+}
+
+.cakeDetail__description{
+    min-width: 10px;
+    margin: 0 auto;
+}
+
+.cakeDetail__name{
+    font-family: Pacifico, cursive;
+    font-size: 75px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.cakeDetail__type{
+    font-family: "Lucida Console", serif;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f6ff00;
+}
+
+.cakeDetail__purchase{
+    height: 50px;
+    padding: 10px 20px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    border: none;
+    background: #ffffff;
+    color: #000000;
+    font-size: 30px;
+    font-family: "Lucida Console", serif;
+    transition: 0.2s ease-in-out;
+}
+
+.cakeDetail__purchase:hover{
     cursor: pointer;
     background: #ee2d2d;
     color: #f6ff00;

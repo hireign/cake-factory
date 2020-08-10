@@ -18,11 +18,9 @@ const breadTypes = () => {
         Bread.findAll({attributes: ['bread_type']})
             .then(data => {
                 let arr = []
-                console.warn(data,"----")
                 Object.keys(data).forEach(function(key){
                     var row = data[key]
                     arr.push(row.bread_type)
-                    console.warn(row.bread_type)
                 });
                 resolve(arr);
             })
@@ -54,7 +52,6 @@ const createBread=(req)=>{
     return new Promise(function(resolve, reject) {
         Bread.findOne({where:{bread_id:req.body.bread_id, bread_type: req.body.bread_type}})
             .then(data => {
-                console.log(data);
                 if(data === null){
                     Bread.create({
                         bread_id: req.body.bread_id,

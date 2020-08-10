@@ -7,7 +7,7 @@ const checkQty = (data) => {
             url: 'https://dlm008cgo1.execute-api.us-east-1.amazonaws.com/prod/bread/breadqty',
             body: {
                 bread_type: data.bread_type,
-                bread_qty_ordered: 5,
+                bread_qty_ordered: data.bread_qty_ordered,
             }
         };
 
@@ -15,7 +15,7 @@ const checkQty = (data) => {
             url: 'http://129.173.67.214:4000/getcreamqty',
             body: {
                 cream_type: data.cream_type,
-                cream_qty_ordered: 1,
+                cream_qty_ordered: data.cream_qty_ordered,
             }
         };
 
@@ -23,7 +23,7 @@ const checkQty = (data) => {
             url: 'http://129.173.67.214:3001/sugarqty',
             body: {
                 sugar_type: data.sugar_type,
-                sugar_qty_ordered: 1,
+                sugar_qty_ordered: data.sugar_qty_ordered,
             }
         };
 
