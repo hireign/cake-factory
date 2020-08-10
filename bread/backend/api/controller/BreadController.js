@@ -13,11 +13,45 @@ const allBreads = () => {
     });
 }
 
+const breadTypes = () => {
+    return new Promise(function(resolve, reject) {
+        Bread.findAll({attributes: ['bread_type']})
+            .then(data => {
+                let arr = []
+                Object.keys(data).forEach(function(key){
+                    var row = data[key]
+                    arr.push(row.bread_type)
+                });
+                resolve(arr);
+            })
+            .catch(err => {
+                resolve({status:null,result: err});
+            });  
+    });
+}
+
+const breadQty = (req) => {
+    return new Promise(function(resolve, reject) {
+        Bread.findOne({where: {
+            bread_type: req.body.bread_type
+          }})
+            .then(data => {
+                if(data.dataValues.bread_qty >= req.body.bread_qty_ordered){
+                    resolve({status:true});
+                }else{
+                    resolve({status:false});
+                }
+            })
+            .catch(err => {
+                resolve({status:null,result: err});
+            });  
+    });
+}
+
 const createBread=(req)=>{
     return new Promise(function(resolve, reject) {
         Bread.findOne({where:{bread_id:req.body.bread_id, bread_type: req.body.bread_type}})
             .then(data => {
-                console.log(data);
                 if(data === null){
                     Bread.create({
                         bread_id: req.body.bread_id,
@@ -72,7 +106,7 @@ const updateBread=(req)=>{
 
 const reduceBreadQuantity=(req)=>{
     return new Promise(function(resolve, reject) {
-        Bread.findOne({where:{bread_id:req.body.bread_id, bread_type: req.body.bread_type}})
+        Bread.findOne({where:{bread_type: req.body.bread_type}})
             .then(data => {
                 const difference = data.dataValues.bread_qty - req.body.bread_qty_ordered;
                 if(difference < 0){
@@ -82,7 +116,6 @@ const reduceBreadQuantity=(req)=>{
                         bread_qty: difference
                       }, {
                         where: { 
-                        bread_id: req.body.bread_id,
                         bread_type: req.body.bread_type,
                          }
                       })
@@ -103,4 +136,5 @@ module.exports.allBreads = allBreads;
 module.exports.createBread = createBread;
 module.exports.updateBread = updateBread;
 module.exports.reduceBreadQuantity = reduceBreadQuantity;
-
+module.exports.breadTypes = breadTypes;
+module.exports.breadQty = breadQty;

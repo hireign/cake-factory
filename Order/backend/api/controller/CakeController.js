@@ -2,7 +2,8 @@ const db = require("../db/connection");
 const Cake = db.cake;
 
 const getAllCake = () => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(async function(resolve, reject) {
+
         Cake.findAll()
             .then(data => {
                 resolve({status: true, data: data});

@@ -5,9 +5,6 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        user_id: {
-            type: Sequelize.STRING
-        },
         timestamp: {
             type: Sequelize.DATE
         },

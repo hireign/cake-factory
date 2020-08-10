@@ -5,16 +5,13 @@ import Cake from "./Cake";
 
 const Speciality = (props) => {
 
-    console.log(props.location.state.data);
-
     let history = useHistory();
 
     const [cake, setCake] = useState();
 
     useEffect(() => {
         const getCake = async () => {
-            const data = await axios.get("http://localhost:5000/cake/getallcake");
-            console.log(data);
+            const data = await axios.get("https://zl6aa5spv2.execute-api.us-east-1.amazonaws.com/production/cake/getallcake");
             setCake(data.data.data);
         };
         getCake();
@@ -22,7 +19,7 @@ const Speciality = (props) => {
 
     return (
         <div className="speciality">
-            <div className="speciality__back" onClick={() => history.push('/')}>
+            <div className="back" onClick={() => history.go(-1)}>
                 <span>&#8592;</span>
             </div>
             <div className="speciality__container">

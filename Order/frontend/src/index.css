@@ -5,7 +5,7 @@ a { text-decoration:none; outline:none}
 a:hover { cursor:pointer; text-decoration:none; text-indent:0}
 body{
     font-family: Arial, serif;
-    background: linear-gradient(-45deg, #ffffff, #f6ff00, #ffffff, #ee2d2d);
+    background: linear-gradient(-45deg, #ffffff, #ee2d2d);
     background-size: 400% 400%;
     height: 100vh;
     padding: 0 20px;
@@ -30,7 +30,7 @@ body{
     width: 300px;
     height: 300px;
     box-shadow: 0 0 15px 5px #000000;
-    background: #0073b1;
+    background: transparent;
     color: #ffffff;
     border-radius: 10px;
     line-height: 300px;
@@ -50,7 +50,7 @@ body{
     transform: translate(2px, 2px);
 }
 
-.speciality__back, .customize__back{
+.back{
     height: 30px;
     width: 30px;
     background: #ffffff;
@@ -58,9 +58,10 @@ body{
     position: relative;
     border-radius: 30px;
     border: 2px solid #ffffff;
+    transition: 0.2s ease-in-out;
 }
 
-.speciality__back span, .customize__back span{
+.back span{
     position: absolute;
     top: 50%;
     left: 2px;
@@ -68,8 +69,8 @@ body{
     font-size: 25px;
 }
 
-.speciality__back:hover, .customize__back:hover{
-    background: #0073b1;
+.back:hover{
+    background: transparent;
     cursor: pointer;
 }
 
@@ -91,5 +92,220 @@ body{
 
 .cake{
     width: 375px;
-    background: red;
+    height: 125px;
+    background: #FFFDD0;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.cake__image{
+    width: 150px;
+}
+
+.cake__image img{
+    width: 150px;
+    height: 125px;
+    object-fit: cover;
+}
+
+.cake__container{
+    width: 225px;
+}
+
+.cake__name{
+    height: 95px;
+    font-size: 25px;
+    word-break: break-word;
+    font-family: "Lucida Calligraphy", cursive;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.cake__more{
+    height: 30px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #ee2d2d;
+    font-size: 20px;
+    font-family: "Lucida Console", serif;
+    transition: 0.2s ease-in-out;
+}
+
+.cake:hover{
+    cursor: pointer;
+}
+
+.cake:hover .cake__more{
+    background: #ee2d2d;
+    color: #f6ff00;
+    cursor: pointer;
+}
+
+.cakeDetail__container{
+    padding: 20px;
+    margin: 50px auto 0;
+    background: transparent;
+    box-shadow: 0 0 5px 2px #000000;
+    border-radius: 10px;
+}
+
+.cakeDetail__container{
+    padding: 20px;
+    margin: 50px auto 0;
+    background: transparent;
+    box-shadow: 0 0 5px 2px #000000;
+    border-radius: 10px;
+}
+
+.customize__container{
+    padding: 20px;
+    margin: 50px auto 0;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.customize__filter{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.customize__select{
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    border: none;
+}
+
+.customize__create{
+    height: 30px;
+    padding: 5px 20px;
+    min-width: 25px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    border: none;
+    background: #ffffff;
+    color: #000000;
+    font-size: 20px;
+    font-family: "Lucida Console", serif;
+    transition: 0.2s ease-in-out;
+}
+
+.customize__create:hover{
+    cursor: pointer;
+    background: #ee2d2d;
+    color: #f6ff00;
+}
+
+.cakeDetail__container{
+    display: flex;
+}
+
+.cakeDetail__image{
+    width: 500px;
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-right: 50px;
+}
+
+.cakeDetail__image img{
+    width: 500px;
+    height: 350px;
+}
+
+.cakeDetail__description{
+    min-width: 10px;
+    margin: 0 auto;
+}
+
+.cakeDetail__name{
+    font-family: Pacifico, cursive;
+    font-size: 75px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.cakeDetail__type{
+    font-family: "Lucida Console", serif;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #f6ff00;
+}
+
+.cakeDetail__purchase{
+    height: 50px;
+    padding: 10px 20px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    border: none;
+    background: #ffffff;
+    color: #000000;
+    font-size: 30px;
+    font-family: "Lucida Console", serif;
+    transition: 0.2s ease-in-out;
+}
+
+.cakeDetail__purchase:hover{
+    cursor: pointer;
+    background: #ee2d2d;
+    color: #f6ff00;
+}
+
+.home__admin{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    box-shadow: 0 0 5px 3px #000000;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    line-height: 30px;
+    font-family: 'Lucida Console', cursive;
+    text-align: center;
+    transition: 0.2s ease-in-out;
+}
+
+.home__admin:hover{
+    cursor: pointer;
+    background: #ffffff;
+    color: #000000;
+}
+
+.admin__container{
+    margin: 50px auto;
+    background: transparent;
+    box-shadow: 0 0 5px 2px #000000;
+    border-radius: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "Lucida Console", serif;
+}
+
+.admin__container td{
+    padding: 20px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.admin__container th {
+    padding: 20px;
+    text-align: left;
+    color: #f6ff00;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 3px solid black;
 }

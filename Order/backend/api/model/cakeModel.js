@@ -10,20 +10,14 @@ module.exports = (sequelize, Sequelize) => {
         sugar_type: {
             type: Sequelize.STRING
         },
-        sugar_qty: {
-            type: Sequelize.DECIMAL(10,2)
-        },
         bread_type: {
             type: Sequelize.STRING
-        },
-        bread_qty: {
-            type: Sequelize.INTEGER
         },
         cream_type: {
             type: Sequelize.STRING
         },
-        cream_qty: {
-            type: Sequelize.DECIMAL(10,2)
+        cake_url: {
+            type: Sequelize.STRING
         }
     },{
         timestamps: false,

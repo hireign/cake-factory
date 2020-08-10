@@ -13,17 +13,4 @@ const getOrder = () => {
     });
 }
 
-const postOrder = (data) => {
-    return new Promise(function(resolve, reject) {
-        Order.create(data)
-            .then(data => {
-                resolve({status: true, result: "Order placed successfully!!"});
-            })
-            .catch(err => {
-                reject({status: false, result: err});
-            });
-    });
-}
-
 module.exports.getOrder = getOrder;
-module.exports.postOrder = postOrder;

@@ -5,8 +5,9 @@ const cors = require('cors');
 const serverless = require('serverless-http');
 const CakeRoute = require('./api/route/CakeRoute');
 const OrderRoute = require('./api/route/OrderRoute');
-const ReduceQtyRoute = require('./api/route/ReduceQtyRoute');
-
+const PaymentRoute = require('./api/route/PaymentRoute');
+const IngredientRoute = require('./api/route/IngredientRoute');
+const CheckRoute = require('./api/route/CheckRoute');
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,10 +25,12 @@ app.get('/', function (req, res) {
 
 app.use('/cake', CakeRoute);
 app.use('/order', OrderRoute);
-app.use('/reduceqty', ReduceQtyRoute);
+app.use('/payment', PaymentRoute);
+app.use('/ingredient', IngredientRoute);
+app.use('/check', CheckRoute);
 
-app.listen(5000, function () {
-    console.log("App is running on port 5000");
-});
+// app.listen(5000, function () {
+//     console.log("App is running on port 5000");
+// });
 
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
