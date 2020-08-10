@@ -15,6 +15,7 @@ const Home = () => {
                 onClick={() => history.push('/customize')}>
                 <p>Customize Cake</p>
             </div>
+            <div className="home__admin" onClick={() => history.push('/admin')}>Admin</div>
         </div>
     );
 };

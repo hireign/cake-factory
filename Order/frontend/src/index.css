@@ -262,3 +262,50 @@ body{
     background: #ee2d2d;
     color: #f6ff00;
 }
+
+.home__admin{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    box-shadow: 0 0 5px 3px #000000;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    line-height: 30px;
+    font-family: 'Lucida Console', cursive;
+    text-align: center;
+    transition: 0.2s ease-in-out;
+}
+
+.home__admin:hover{
+    cursor: pointer;
+    background: #ffffff;
+    color: #000000;
+}
+
+.admin__container{
+    margin: 50px auto;
+    background: transparent;
+    box-shadow: 0 0 5px 2px #000000;
+    border-radius: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "Lucida Console", serif;
+}
+
+.admin__container td{
+    padding: 20px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.admin__container th {
+    padding: 20px;
+    text-align: left;
+    color: #f6ff00;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 3px solid black;
+}
