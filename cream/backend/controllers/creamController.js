@@ -109,6 +109,7 @@ async function updateCream(req, res, next) {
   }
 }
 
+//following function is based on Simranbanu Diwan's reduceBreadQuantity function in BreadController.js
 const reduceCreamQuantity = (req) => {
   return new Promise(function (resolve, reject) {
     Cream.findOne({
